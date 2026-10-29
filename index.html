@@ -1,393 +1,529 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>С Днём Святого Валентина ❤️</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: #fef6f9;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 380px;
-            background: white;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.02), 0 8px 20px rgba(255, 105, 180, 0.1);
-            padding: 30px 24px;
-            margin: 16px;
-            text-align: center;
-            transition: opacity 0.4s ease;
-        }
-
-        h1 {
-            font-size: 26px;
-            font-weight: 400;
-            letter-spacing: -0.5px;
-            color: #2d2d2d;
-            margin-bottom: 20px;
-        }
-
-        h1 span {
-            font-weight: 600;
-            background: linear-gradient(135deg, #ff7b9c, #ff9eb5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .page {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .page.hidden {
-            display: none;
-        }
-
-        .question-title {
-            font-size: 22px;
-            font-weight: 400;
-            color: #2d2d2d;
-            margin-bottom: 16px;
-        }
-
-        .question-emoji {
-            font-size: 48px;
-            margin-bottom: 24px;
-            animation: softPulse 2s infinite;
-        }
-
-        @keyframes softPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .math-question {
-            background: #fafafa;
-            border-radius: 32px;
-            padding: 32px 20px;
-            margin-bottom: 24px;
-            border: 1px solid #fff0f5;
-            width: 100%;
-        }
-
-        .question-text {
-            font-size: 42px;
-            font-weight: 500;
-            color: #ff7b9c;
-            margin-bottom: 24px;
-            letter-spacing: 2px;
-        }
-
-        .answer-input {
-            width: 120px;
-            height: 60px;
-            text-align: center;
-            font-size: 32px;
-            font-weight: 400;
-            border: 2px solid #ffe2eb;
-            border-radius: 30px;
-            outline: none;
-            color: #ff4d6d;
-            background: white;
-            margin-bottom: 20px;
-            padding: 0 10px;
-            -moz-appearance: textfield;
-            appearance: textfield;
-        }
-
-        .answer-input::-webkit-outer-spin-button,
-        .answer-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        .answer-input:focus {
-            border-color: #ffb6c1;
-            box-shadow: 0 0 0 3px rgba(255, 180, 200, 0.2);
-        }
-
-        .check-btn {
-            background: #ffe2ec;
-            border: none;
-            color: #ff4d6d;
-            font-size: 18px;
-            font-weight: 500;
-            padding: 14px 32px;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 4px 12px rgba(255, 128, 128, 0.2);
-            border: 1px solid #ffd9e6;
-            -webkit-tap-highlight-color: transparent;
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        .check-btn:active {
-            background: #ffd3e0;
-            transform: scale(0.97);
-        }
-
-        .error-message {
-            color: #ff9eb5;
-            font-size: 16px;
-            margin-top: 16px;
-            min-height: 24px;
-            font-style: italic;
-        }
-
-        .days-page {
-            text-align: center;
-        }
-
-        .days-number {
-            font-size: 64px;
-            font-weight: 500;
-            background: linear-gradient(145deg, #ff4d6d, #ff8aa1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 16px 0 8px;
-            line-height: 1;
-        }
-
-        .days-text {
-            font-size: 22px;
-            color: #2d2d2d;
-            font-weight: 400;
-            margin-bottom: 24px;
-        }
-
-        .heart-image-container {
-            width: 160px;
-            height: 160px;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .heart-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(255, 80, 120, 0.3));
-        }
-
-        .next-btn {
-            background: #ffe2ec;
-            border: none;
-            color: #ff4d6d;
-            font-size: 20px;
-            font-weight: 500;
-            padding: 16px 20px;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-            margin: 30px 0 10px 0;
-            box-shadow: 0 4px 12px rgba(255, 128, 128, 0.2);
-            border: 1px solid #ffd9e6;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .next-btn:active {
-            background: #ffd3e0;
-            transform: scale(0.98);
-        }
-
-        .final-page {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 500px;
-        }
-
-        .final-image-wrapper {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 32px;
-            box-shadow: 0 20px 30px rgba(255, 141, 161, 0.15);
-            border: 3px solid white;
-            background: #ffe2eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .final-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .love-message {
-            font-size: 48px;
-            font-weight: 350;
-            color: #1f1f1f;
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
-
-        .love-message span {
-            font-size: 56px;
-            font-weight: 500;
-            background: linear-gradient(145deg, #ff4d6d, #ff8aa1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        .small-note {
-            margin-top: 24px;
-            font-size: 15px;
-            color: #a0a0b0;
-            font-style: italic;
-        }
-
-        .back-btn {
-            background: white;
-            border: 1.5px solid #ffe2eb;
-            color: #ff7b9c;
-            font-size: 17px;
-            font-weight: 500;
-            padding: 10px 24px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 40px;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .back-btn:active {
-            background: #fff0f5;
-            transform: scale(0.97);
-        }
-
-        .divider {
-            width: 80px;
-            height: 2px;
-            background: #ffe3ec;
-            margin: 20px auto;
-            border-radius: 2px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f4ef">
+  <title>Наша история</title>
+  <style>
+    :root {
+      --paper: #f8f4ef;
+      --ink: #423a37;
+      --muted: #8b7d75;
+      --line: #c7a89b;
+      --accent: #a66f67;
+      --content-width: 1080px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 12% 4%, rgba(222, 198, 184, .22), transparent 32rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.55;
+    }
+    .intro {
+      position: relative;
+      text-align: center;
+      padding: clamp(5rem, 13vw, 9rem) 1.25rem 5rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font: 600 .72rem/1.4 system-ui, sans-serif;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5.8rem);
+      line-height: .98;
+      font-weight: 400;
+      letter-spacing: -.045em;
+      margin: 1rem 0 1.25rem;
+    }
+    .intro p {
+      max-width: 35rem;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+    }
+    .start-dot {
+      width: 13px; height: 13px;
+      display: block;
+      border-radius: 50%;
+      background: var(--accent);
+      margin: 2.6rem auto 0;
+      box-shadow: 0 0 0 7px rgba(166,111,103,.12);
+    }
+    .timeline {
+      position: relative;
+      width: min(100% - 2rem, var(--content-width));
+      margin: 0 auto;
+      padding: 0 0 5rem;
+    }
+    .timeline-line {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .timeline-line path {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .moment {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr);
+      align-items: start;
+      min-height: 150px;
+      padding: 0 0 5rem;
+      z-index: 1;
+    }
+    .moment.left .moment-content { grid-column: 1; grid-row: 1; text-align: right; }
+    .moment.right .moment-content { grid-column: 3; grid-row: 1; text-align: left; }
+    .marker {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: center;
+      margin-top: 1.05rem;
+      width: 13px;
+      height: 13px;
+      border: 3px solid var(--paper);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 1px var(--line);
+    }
+    .moment-content { min-width: 0; }
+    .date {
+      margin: 0 0 .35rem;
+      color: var(--accent);
+      font: 600 .72rem/1.4 system-ui, sans-serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h2 {
+      font-weight: 400;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.15;
+      margin: 0 0 1.15rem;
+      letter-spacing: -.02em;
+    }
+    .image-wrap {
+      margin: 0;
+      padding: .5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.38);
+      border: 1px solid rgba(199,168,155,.35);
+      border-radius: 4px;
+      min-height: 80px;
+      max-width: 100%;
+    }
+    .image-wrap img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 72svh;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 1px;
+    }
+    .caption {
+      color: #756760;
+      font-size: 1rem;
+      margin: 1rem 0 0;
+      overflow-wrap: anywhere;
+    }
+    .moment.left .image-wrap { margin-left: auto; }
+    .moment.right .image-wrap { margin-right: auto; }
+    .closing {
+      text-align: center;
+      padding: 2rem 1.5rem 7rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .closing .end-dot {
+      display: block;
+      margin: 0 auto 2rem;
+      width: 15px; height: 15px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 8px rgba(166,111,103,.12);
+    }
+    .closing h2 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      margin-bottom: .8rem;
+    }
+    .closing p { color: var(--muted); margin: 0; }
+    .footer-note {
+      font: .72rem/1.5 system-ui, sans-serif;
+      color: #aa9a91;
+      text-align: center;
+      padding: 0 1rem 2rem;
+    }
+    @media (max-width: 680px) {
+      .intro { padding-top: 5rem; padding-bottom: 3.5rem; }
+      .timeline { width: min(100% - 1.1rem, 560px); }
+      .moment {
+        grid-template-columns: 24px minmax(0, 1fr);
+        padding-bottom: 3.5rem;
+        min-height: 0;
+      }
+      .moment.left .moment-content,
+      .moment.right .moment-content {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: left;
+      }
+      .marker {
+        grid-column: 1;
+        margin-top: .25rem;
+        width: 11px;
+        height: 11px;
+      }
+      .moment.left .image-wrap,
+      .moment.right .image-wrap { margin-left: 0; margin-right: 0; }
+      .image-wrap { justify-content: flex-start; }
+      .image-wrap img { max-height: 68svh; max-width: 100%; }
+      .timeline-line { width: 24px; left: 0; }
+      h2 { font-size: 1.5rem; }
+      .caption { font-size: .97rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="page" id="questionPage">
-            <h1><span>День Кили с Жабой</span></h1>
-            <div class="question-emoji">🤔</div>
-            <div class="math-question">
-                <div class="question-text">194 + 645 =</div>
-                <input type="number" id="answerInput" class="answer-input" placeholder="" inputmode="numeric">
-                <button class="check-btn" id="checkAnswerBtn">Нучо</button>
-                <div class="error-message" id="errorMessage"></div>
-            </div>
+  <header class="intro">
+    <div class="eyebrow">30 октября 2023 — наша история</div>
+    <h1>Наша история</h1>
+    <p>Маленькие сообщения, важные даты и моменты, из которых сложилось что-то особенное.</p>
+    <span class="start-dot" aria-hidden="true"></span>
+  </header>
+
+  <main class="timeline" aria-label="Временная линия нашей истории">
+    <svg class="timeline-line" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M50 0 C50 30 36 38 39 62 S61 105 52 135 S35 178 43 205 S66 248 54 278 S32 318 43 348 S66 390 53 420 S33 458 42 490 S65 530 53 560 S34 600 43 630 S65 670 53 700 S34 740 43 770 S65 810 53 840 S35 880 44 910 S57 960 50 1000"/>
+    </svg>
+    
+      <article class="moment left" id="moment-01">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">30 октября 2023</p>
+          <h2>С самого начала</h2>
+          <figure class="image-wrap">
+            <img src="images/1%20(30.10.23).png" alt="Воспоминание 1: С самого начала" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
         </div>
-
-        <div class="page hidden" id="daysPage">
-            <h1><span></span></h1>
-            <div class="days-number">839</div>
-            <div class="days-text">именно столько дней</div>
-            
-            <div class="heart-image-container">
-                <img class="heart-image" src="https://cdn-icons-png.flaticon.com/512/2107/2107845.png" alt="красивое сердечко">
-            </div>
-            
-            <div style="font-size: 18px; color: #8e8e98; margin-bottom: 20px;">мы с тобой уже вместе</div>
-            <div class="divider"></div>
-            <button class="next-btn" id="goToFinalBtn">Открыть послание</button>
+      </article>
+      <article class="moment right" id="moment-02">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">6 ноября 2023</p>
+          <h2>Ещё один шаг навстречу</h2>
+          <figure class="image-wrap">
+            <img src="images/2%20(06.11.2023).png" alt="Воспоминание 2: Ещё один шаг навстречу" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
         </div>
-
-        <div class="page hidden" id="finalPage">
-            <div class="final-image-wrapper">
-                <img class="final-image" src="killya_and_jaba.jpeg" alt="" id="loveImage">
-            </div>
-            
-            <div class="love-message">
-                я очень люблю тебя
-            </div>
-            <div class="small-note">с нашим днем, счастье мое</div>
-            <button class="back-btn" id="backToStartBtn">← Еще разок</button>
+      </article>
+      <article class="moment left" id="moment-03">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">14 ноября 2023</p>
+          <h2>Маленький момент</h2>
+          <figure class="image-wrap">
+            <img src="images/3%20(14.11.2023).png" alt="Воспоминание 3: Маленький момент" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
         </div>
-    </div>
+      </article>
+      <article class="moment right" id="moment-04">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">28 ноября 2023</p>
+          <h2>То, что хочется помнить</h2>
+          <figure class="image-wrap">
+            <img src="images/4%20(28.11.2023).png" alt="Воспоминание 4: То, что хочется помнить" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-05">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">5 декабря 2023</p>
+          <h2>Наш разговор</h2>
+          <figure class="image-wrap">
+            <img src="images/5%20(05.12.2023).png" alt="Воспоминание 5: Наш разговор" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-06">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">14 декабря 2023</p>
+          <h2>Тёплое воспоминание</h2>
+          <figure class="image-wrap">
+            <img src="images/6%20(14.12.2023).png" alt="Воспоминание 6: Тёплое воспоминание" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-07">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">5 декабря 2023</p>
+          <h2>Ещё одно воспоминание</h2>
+          <figure class="image-wrap">
+            <img src="images/7%20(5.12.2023).png" alt="Воспоминание 7: Ещё одно воспоминание" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-08">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">30 декабря 2023</p>
+          <h2>В конце года</h2>
+          <figure class="image-wrap">
+            <img src="images/8%20(30.12.2023).png" alt="Воспоминание 8: В конце года" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-09">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">Новый год 2024</p>
+          <h2>Первый Новый год в нашей истории</h2>
+          <figure class="image-wrap">
+            <img src="images/9%20(%D0%9D%D0%9324).png" alt="Воспоминание 9: Первый Новый год в нашей истории" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-10">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">27 января 2024</p>
+          <h2>Январский момент</h2>
+          <figure class="image-wrap">
+            <img src="images/10%20(27.01.2024).png" alt="Воспоминание 10: Январский момент" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-11">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">24 февраля 2024</p>
+          <h2>То самое сообщение</h2>
+          <figure class="image-wrap">
+            <img src="images/11%20(24.02.2024).png" alt="Воспоминание 11: То самое сообщение" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-12">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">5 марта 2024</p>
+          <h2>Наш маленький секрет</h2>
+          <figure class="image-wrap">
+            <img src="images/12%20(05.03.2024).png" alt="Воспоминание 12: Наш маленький секрет" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-13">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">26 марта 2024</p>
+          <h2>Весеннее воспоминание</h2>
+          <figure class="image-wrap">
+            <img src="images/13%20(26.03.2024).png" alt="Воспоминание 13: Весеннее воспоминание" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-14">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">22 апреля 2024</p>
+          <h2>Ещё ближе</h2>
+          <figure class="image-wrap">
+            <img src="images/14%20(22.04.2024).png" alt="Воспоминание 14: Ещё ближе" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-15">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">17 июня 2024</p>
+          <h2>Этот день</h2>
+          <figure class="image-wrap">
+            <img src="images/15%20(17.06.2024).png" alt="Воспоминание 15: Этот день" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-16">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">17 июня 2024</p>
+          <h2>Продолжение истории</h2>
+          <figure class="image-wrap">
+            <img src="images/16%20(17.06.2024).png" alt="Воспоминание 16: Продолжение истории" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-17">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">27 октября 2024</p>
+          <h2>Год спустя</h2>
+          <figure class="image-wrap">
+            <img src="images/17%20(27.10.2024).png" alt="Воспоминание 17: Год спустя" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-18">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">28 октября 2024</p>
+          <h2>День, который остался с нами</h2>
+          <figure class="image-wrap">
+            <img src="images/18%20(28.10.2024).png" alt="Воспоминание 18: День, который остался с нами" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-19">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">6 ноября 2024</p>
+          <h2>Ещё одна дата в нашей истории</h2>
+          <figure class="image-wrap">
+            <img src="images/19%20(06.11.2024).png" alt="Воспоминание 19: Ещё одна дата в нашей истории" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-20">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">Новый год 2025</p>
+          <h2>Ещё один Новый год</h2>
+          <figure class="image-wrap">
+            <img src="images/20%20(%D0%9D%D0%9325).png" alt="Воспоминание 20: Ещё один Новый год" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-21">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">27 августа 2025</p>
+          <h2>Снова вместе в этой истории</h2>
+          <figure class="image-wrap">
+            <img src="images/21%20(27.08.2025).png" alt="Воспоминание 21: Снова вместе в этой истории" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-22">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">28 августа 2025</p>
+          <h2>На следующий день</h2>
+          <figure class="image-wrap">
+            <img src="images/22%20(28.08.2025).png" alt="Воспоминание 22: На следующий день" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-23">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">Новый год 2026</p>
+          <h2>Новый год — наша история продолжается</h2>
+          <figure class="image-wrap">
+            <img src="images/23%20(%D0%9D%D0%9326).png" alt="Воспоминание 23: Новый год — наша история продолжается" loading="lazy">
+          </figure>
+          <p class="caption">Добавь здесь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-24">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">Трудный период</p>
+          <h2>Даже непростые главы — часть нашей истории</h2>
+          <figure class="image-wrap">
+            <img src="images/%D0%A0%D0%B0%D0%B7%D1%80%D1%8B%D0%B21.png" alt="Воспоминание 24: Даже непростые главы — часть нашей истории" loading="lazy">
+          </figure>
+          <p class="caption">Здесь можно написать о том, что ты чувствуешь и что хочешь оставить в прошлом.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-25">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">Трудный период</p>
+          <h2>Не всё было просто</h2>
+          <figure class="image-wrap">
+            <img src="images/%D0%A0%D0%B0%D0%B7%D1%80%D1%8B%D0%B22.png" alt="Воспоминание 25: Не всё было просто" loading="lazy">
+          </figure>
+          <p class="caption">Добавь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment right" id="moment-26">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">После трудного периода</p>
+          <h2>И всё же наша история продолжается</h2>
+          <figure class="image-wrap">
+            <img src="images/%D0%A0%D0%B0%D0%B7%D1%80%D1%8B%D0%B23.png" alt="Воспоминание 26: И всё же наша история продолжается" loading="lazy">
+          </figure>
+          <p class="caption">Добавь свою подпись к этому воспоминанию.</p>
+        </div>
+      </article>
+      <article class="moment left" id="moment-27">
+        <span class="marker" aria-hidden="true"></span>
+        <div class="moment-content">
+          <p class="date">Сейчас</p>
+          <h2>И самое главное — впереди</h2>
+          <figure class="image-wrap">
+            <img src="images/%D0%A1%D1%87%D0%B0%D1%81%D1%82%D1%8C%D0%B5.jpg" alt="Воспоминание 27: И самое главное — впереди" loading="lazy">
+          </figure>
+          <p class="caption">Три года нашей истории. И я хочу, чтобы у неё было продолжение.</p>
+        </div>
+      </article>
+  </main>
 
-    <script>
-        (function() {
-            const correctAnswer = 839;
-            
-            const questionPage = document.getElementById('questionPage');
-            const daysPage = document.getElementById('daysPage');
-            const finalPage = document.getElementById('finalPage');
-            
-            const answerInput = document.getElementById('answerInput');
-            const checkBtn = document.getElementById('checkAnswerBtn');
-            const errorMessage = document.getElementById('errorMessage');
-            
-            const goToFinalBtn = document.getElementById('goToFinalBtn');
-            const backToStartBtn = document.getElementById('backToStartBtn');
-
-            checkBtn.addEventListener('click', function() {
-                const answer = parseInt(answerInput.value);
-                
-                if (answer === correctAnswer) {
-                    questionPage.classList.add('hidden');
-                    daysPage.classList.remove('hidden');
-                    errorMessage.textContent = '';
-                    answerInput.value = '';
-                } else {
-                    errorMessage.textContent = 'Слишком сложно?:) Попробуй снова, киса';
-                    
-                    answerInput.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        answerInput.style.transform = 'scale(1)';
-                    }, 100);
-                }
-            });
-
-            answerInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkBtn.click();
-                }
-            });
-
-            goToFinalBtn.addEventListener('click', function() {
-                daysPage.classList.add('hidden');
-                finalPage.classList.remove('hidden');
-            });
-
-            backToStartBtn.addEventListener('click', function() {
-                finalPage.classList.add('hidden');
-                questionPage.classList.remove('hidden');
-                errorMessage.textContent = '';
-            });
-
-            document.getElementById('loveImage').onerror = function() {
-                this.style.backgroundColor = '#ffe2eb';
-                this.src = '';
-                this.alt = '❤️';
-            };
-
-            answerInput.focus();
-        })();
-    </script>
+  <section class="closing">
+    <span class="end-dot" aria-hidden="true"></span>
+    <h2>Продолжение следует…</h2>
+    <p>Это ещё не вся наша история.</p>
+  </section>
+  <div class="footer-note">Сделано с любовью</div>
 </body>
 </html>
